@@ -90,7 +90,8 @@ class restore_qtype_extrafields_plugin extends restore_qtype_plugin {
         $questioncreated = $this->get_mappingid('question_created', $oldquestionid) ? true : false;
 
         if ($questioncreated) {
-            $data['answerid'] = $this->get_mappingid('question_answer', $data['id']);
+            $oldanswerid = $this->get_old_parentid('question_answer');
+            $data['answerid'] = $this->get_mappingid('question_answer', $oldanswerid);
             $DB->insert_record($tablename, $data);
         } else {
             $DB->update_record($tablename, $data);
